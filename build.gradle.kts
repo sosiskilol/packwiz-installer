@@ -41,6 +41,12 @@ dependencies {
 	implementation("cc.ekblad:4koma:1.1.0")
 
 	r8("com.android.tools:r8:3.3.28")
+	val flatlafVersion = "3.4"
+	implementation( "com.formdev:flatlaf:${flatlafVersion}" )
+	implementation( "com.formdev:flatlaf:${flatlafVersion}:linux-x86_64@so" )
+	implementation( "com.formdev:flatlaf:${flatlafVersion}:macos-arm64@dylib" )
+	implementation( "com.formdev:flatlaf:${flatlafVersion}:macos-x86_64@dylib" )
+	implementation( "com.formdev:flatlaf:${flatlafVersion}:windows-x86_64@dll" )
 }
 
 application {

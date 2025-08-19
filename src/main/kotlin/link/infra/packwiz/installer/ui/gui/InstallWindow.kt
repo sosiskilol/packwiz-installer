@@ -7,8 +7,11 @@ import java.awt.GridBagConstraints
 import java.awt.GridBagLayout
 import javax.swing.*
 import javax.swing.border.EmptyBorder
+import javax.swing.ImageIcon
 
 class InstallWindow(private val handler: GUIHandler) : JFrame() {
+	private val animationIcon: ImageIcon
+	private val animationLabel : JLabel
 	private var lblProgresslabel: JLabel
 	private var progressBar: JProgressBar
 	private var btnOptions: JButton
@@ -16,12 +19,20 @@ class InstallWindow(private val handler: GUIHandler) : JFrame() {
 	private val btnOk: JButton
 	private val buttonsPanel: JPanel
 
+
 	init {
-		setBounds(100, 100, 493, 95)
+		setBounds(100, 100, 250, 300)
 		// Works better with tiling window managers - there isn't any reason to change window size currently anyway
 		isResizable = false
 		defaultCloseOperation = EXIT_ON_CLOSE
 		setLocationRelativeTo(null)
+
+		animationLabel = JLabel("xd")
+		animationIcon = ImageIcon(InstallWindow::class.java.getResource("/images/animation.gif"))
+		animationIcon.imageObserver = animationLabel
+		animationLabel.icon = animationIcon
+		animationLabel.isOpaque = false
+		add(animationLabel, BorderLayout.CENTER)
 
 		// Progress bar and loading text
 		add(JPanel().apply {
@@ -35,7 +46,7 @@ class InstallWindow(private val handler: GUIHandler) : JFrame() {
 
 			lblProgresslabel = JLabel("Loading...")
 			add(lblProgresslabel, BorderLayout.SOUTH)
-		}, BorderLayout.CENTER)
+		}, BorderLayout.SOUTH)
 
 		// Buttons
 		buttonsPanel = JPanel().apply {
@@ -73,7 +84,7 @@ class InstallWindow(private val handler: GUIHandler) : JFrame() {
 				handler.okButtonPressed = true
 			}
 		}
-		add(buttonsPanel, BorderLayout.EAST)
+		//add(buttonsPanel, BorderLayout.EAST)
 	}
 
 	fun displayProgress(progress: InstallProgress) {

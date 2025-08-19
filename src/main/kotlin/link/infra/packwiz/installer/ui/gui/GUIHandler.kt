@@ -1,5 +1,6 @@
 package link.infra.packwiz.installer.ui.gui
 
+import com.formdev.flatlaf.FlatDarculaLaf
 import link.infra.packwiz.installer.ui.IUserInterface
 import link.infra.packwiz.installer.ui.IUserInterface.ExceptionListResult
 import link.infra.packwiz.installer.ui.data.ExceptionDetails
@@ -42,7 +43,7 @@ class GUIHandler : IUserInterface {
 	@Volatile
 	override var firstInstall = false
 
-	override var title = "packwiz-installer"
+	override var title = "Sosiski Updater"
 		set(value) {
 			field = value
 			EventQueue.invokeLater { frmPackwizlauncher.title = value }
@@ -51,7 +52,8 @@ class GUIHandler : IUserInterface {
 	init {
 		EventQueue.invokeAndWait {
 			try {
-				UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+				//UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName())
+				FlatDarculaLaf.setup()
 			} catch (e: Exception) {
 				Log.warn("Failed to set look and feel", e)
 			}
