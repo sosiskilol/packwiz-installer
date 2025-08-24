@@ -1,6 +1,7 @@
 name: Java Gradle Snapshot
 
 on:
+  workflow_dispatch:
   push:
     branches:
       - 'main'

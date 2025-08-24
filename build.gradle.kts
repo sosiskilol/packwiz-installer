@@ -180,33 +180,3 @@ javaComponent.addVariantsFromConfiguration(distJarOutput) {
 javaComponent.withVariantsFromConfiguration(configurations["shadowRuntimeElements"]) {
 	skip()
 }
-
-if (project.hasProperty("bunnycdn.token")) {
-	publishing {
-		publications {
-			create<MavenPublication>("maven") {
-				groupId = "link.infra.packwiz"
-				artifactId = "packwiz-installer"
-
-				from(components["java"])
-			}
-		}
-		repositories {
-			maven {
-				url = if (project.findProperty("release") == "true") {
-					uri("https://storage.bunnycdn.com/comp-maven/repository/release")
-				} else {
-					uri("https://storage.bunnycdn.com/comp-maven/repository/snapshot")
-				}
-				credentials(HttpHeaderCredentials::class) {
-					name = "AccessKey"
-					value = findProperty("bunnycdn.token") as String?
-				}
-				authentication {
-					create<HttpHeaderAuthentication>("header")
-				}
-			}
-		}
-	}
-}
-
